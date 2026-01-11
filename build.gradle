@@ -31,10 +31,12 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     // gRPC client dependencies
+    implementation platform("io.grpc:grpc-bom:1.61.0") // Import the gRPC BOM
     implementation 'net.devh:grpc-client-spring-boot-starter:3.1.0.RELEASE'
-    implementation 'io.grpc:grpc-netty-shaded:1.61.0'
-    implementation 'io.grpc:grpc-protobuf:1.61.0'
-    implementation 'io.grpc:grpc-stub:1.61.0'
+    implementation 'io.grpc:grpc-netty-shaded'
+    implementation 'io.grpc:grpc-protobuf'
+    implementation 'io.grpc:grpc-stub'
+    implementation 'io.grpc:grpc-services' // Add this for round_robin support
     implementation 'com.google.protobuf:protobuf-java:3.25.1'
 
     compileOnly 'org.apache.tomcat:annotations-api:6.0.53' // for @Generated annotation
@@ -43,7 +45,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testImplementation 'io.grpc:grpc-testing:1.61.0'
+    testImplementation 'io.grpc:grpc-testing'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
