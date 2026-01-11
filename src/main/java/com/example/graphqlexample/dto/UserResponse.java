@@ -1,16 +1,16 @@
 package com.example.graphqlexample.dto;
 
-public class UserDto {
+public class UserResponse {
 
     private Long id;
     private String firstName;
     private String lastName;
     private String email;
 
-    public UserDto() {
+    public UserResponse() {
     }
 
-    public UserDto(Long id, String firstName, String lastName, String email) {
+    public UserResponse(Long id, String firstName, String lastName, String email) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -49,5 +49,3 @@ public class UserDto {
         this.email = email;
     }
 }
-
-

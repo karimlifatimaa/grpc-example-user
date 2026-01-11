@@ -1,20 +1,19 @@
 package com.example.graphqlexample.service;
 
-import com.example.graphqlexample.dto.UserCreateRequest;
-import com.example.graphqlexample.dto.UserDto;
-import com.example.graphqlexample.dto.UserUpdateRequest;
+import com.example.graphqlexample.dto.UserRequest;
+import com.example.graphqlexample.dto.UserResponse;
 
 import java.util.List;
 
 public interface UserService {
 
-    UserDto createUser(UserCreateRequest request);
+    UserResponse createUser(UserRequest request);
 
-    UserDto getUserById(Long id);
+    UserResponse getUserById(Long id);
 
-    List<UserDto> getAllUsers();
+    List<UserResponse> getAllUsers();
 
-    UserDto updateUser(Long id, UserUpdateRequest request);
+    UserResponse updateUser(Long id, UserRequest request);
 
     void deleteUser(Long id);
 }

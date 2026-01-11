@@ -1,8 +1,7 @@
 package com.example.graphqlexample.service;
 
-import com.example.graphqlexample.dto.UserCreateRequest;
-import com.example.graphqlexample.dto.UserDto;
-import com.example.graphqlexample.dto.UserUpdateRequest;
+import com.example.graphqlexample.dto.UserRequest;
+import com.example.graphqlexample.dto.UserResponse;
 import com.example.graphqlexample.exception.EmailAlreadyExistsException;
 import com.example.graphqlexample.exception.UserNotFoundException;
 import com.example.graphqlexample.model.User;
@@ -23,7 +22,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto createUser(UserCreateRequest request) {
+    public UserResponse createUser(UserRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new EmailAlreadyExistsException(request.getEmail());
         }
@@ -33,28 +32,28 @@ public class UserServiceImpl implements UserService {
                 request.getEmail()
         );
         User saved = userRepository.save(user);
-        return toDto(saved);
+        return toResponse(saved);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public UserDto getUserById(Long id) {
+    public UserResponse getUserById(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
-        return toDto(user);
+        return toResponse(user);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<UserDto> getAllUsers() {
+    public List<UserResponse> getAllUsers() {
         return userRepository.findAll()
                 .stream()
-                .map(this::toDto)
+                .map(this::toResponse)
                 .toList();
     }
 
     @Override
-    public UserDto updateUser(Long id, UserUpdateRequest request) {
+    public UserResponse updateUser(Long id, UserRequest request) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException(id));
 
@@ -72,7 +71,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User updated = userRepository.save(user);
-        return toDto(updated);
+        return toResponse(updated);
     }
 
     @Override
@@ -83,8 +82,8 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
-    private UserDto toDto(User user) {
-        return new UserDto(
+    private UserResponse toResponse(User user) {
+        return new UserResponse(
                 user.getId(),
                 user.getFirstName(),
                 user.getLastName(),

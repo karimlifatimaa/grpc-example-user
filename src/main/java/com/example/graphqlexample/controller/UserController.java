@@ -1,8 +1,7 @@
 package com.example.graphqlexample.controller;
 
-import com.example.graphqlexample.dto.UserCreateRequest;
-import com.example.graphqlexample.dto.UserDto;
-import com.example.graphqlexample.dto.UserUpdateRequest;
+import com.example.graphqlexample.dto.UserRequest;
+import com.example.graphqlexample.dto.UserResponse;
 import com.example.graphqlexample.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,24 +20,24 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody UserCreateRequest request) {
-        UserDto user = userService.createUser(request);
+    public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request) {
+        UserResponse user = userService.createUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
+    public ResponseEntity<UserResponse> getUser(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDto>> getAllUsers() {
+    public ResponseEntity<List<UserResponse>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> updateUser(@PathVariable Long id,
-                                              @RequestBody UserUpdateRequest request) {
+    public ResponseEntity<UserResponse> updateUser(@PathVariable Long id,
+                                              @RequestBody UserRequest request) {
         return ResponseEntity.ok(userService.updateUser(id, request));
     }
 

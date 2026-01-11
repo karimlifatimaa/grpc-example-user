@@ -1,15 +1,15 @@
 package com.example.graphqlexample.dto;
 
-public class UserCreateRequest {
+public class UserRequest {
 
     private String firstName;
     private String lastName;
     private String email;
 
-    public UserCreateRequest() {
+    public UserRequest() {
     }
 
-    public UserCreateRequest(String firstName, String lastName, String email) {
+    public UserRequest(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -39,5 +39,3 @@ public class UserCreateRequest {
         this.email = email;
     }
 }
-
-
